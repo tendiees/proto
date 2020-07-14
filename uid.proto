@@ -1,0 +1,62 @@
+syntax = "proto3";
+package uid;
+
+option go_package = "github.com/tendiees/uid";
+
+service Service {
+    rpc Ping(PingRequest) returns (PingResponse) {}
+
+    rpc Register(RegisterRequest) returns (RegisterResponse) {}
+    rpc ID(IDRequest) returns (IDResponse) {}
+    rpc Username(UsernameRequest) returns (UsernameResponse) {}
+}
+
+message PingRequest {
+    string payload = 1;
+}
+
+message PingResponse {
+    string payload = 1;
+}
+
+message RegisterRequest {
+    string username = 1;
+}
+
+message RegisterResponse {
+    string id = 1;
+    Status status = 12;
+
+    enum Status {
+        SUCCESS = 0;
+        ERROR = 64;
+    }
+}
+
+message IDRequest {
+    string username = 1;
+}
+
+message IDResponse {
+    string id = 1;
+    Status status = 12;
+
+    enum Status {
+        SUCCESS = 0;
+        ERROR = 64;
+    }
+}
+
+message UsernameRequest {
+    string id = 1;
+}
+
+message UsernameResponse {
+    string username = 1;
+    Status status = 12;
+
+    enum Status {
+        SUCCESS = 0;
+        ERROR = 64;
+    }
+}

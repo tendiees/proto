@@ -1,0 +1,33 @@
+syntax = "proto3";
+package bancc;
+
+option go_package = "github.com/tendiees/bancc";
+
+service Service {
+    rpc Ping(PingRequest) returns (PingResponse) {}
+
+    rpc Auth(AuthRequest) returns (AuthResponse) {}
+}
+
+message PingRequest {
+    string payload = 1;
+}
+
+message PingResponse {
+    string payload = 1;
+}
+
+message AuthRequest {
+    string username = 1;
+    string password = 2;
+}
+
+message AuthResponse {
+    string token = 1;
+    Status status = 12;
+
+    enum Status {
+        SUCCESS = 0;
+        ERROR = 64;
+    }
+}

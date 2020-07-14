@@ -1,0 +1,66 @@
+syntax = "proto3";
+package auth;
+
+option go_package = "github.com/tendiees/auth";
+
+service Auth {
+    rpc Ping(PingRequest) returns (PingResponse) {}
+
+    rpc Auth(AuthRequest) returns (AuthResponse) {}
+    rpc Verify(VerifyRequest) returns (VerifyResponse) {}
+    rpc Refresh(RefreshRequest) returns (RefreshResponse) {}
+}
+
+message PingRequest {
+    string payload = 1;
+}
+
+message PingResponse {
+    string payload = 1;
+}
+
+message AuthRequest {
+    string username = 1;
+    string password = 2;
+}
+
+message AuthResponse {
+    string rt = 1;
+    string at = 2;
+    Status status = 12;
+
+    enum Status {
+        SUCCESS = 0;
+        ERROR = 64;
+    }
+}
+
+message VerifyRequest {
+    string at = 1;
+}
+
+message VerifyResponse {
+    bool ok = 1;
+    Status status = 12;
+
+    enum Status {
+        SUCCESS = 0;
+        ERROR = 64;
+    }
+}
+
+message RefreshRequest {
+    string rt = 1;
+}
+
+message RefreshResponse {
+    string rt = 1;
+    string at = 2;
+    Status status = 12;
+
+    enum Status {
+        SUCCESS = 0;
+        ERROR = 64;
+    }
+}
+

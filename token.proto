@@ -1,0 +1,10 @@
+syntax = "proto3";
+package token;
+
+message Access {
+    string payload = 1;
+}
+
+message Refresh {
+    string payload = 2;
+}
